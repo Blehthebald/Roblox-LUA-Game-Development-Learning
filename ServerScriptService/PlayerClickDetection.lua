@@ -5,6 +5,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local clickevent = ReplicatedStorage:WaitForChild("ClickEvent")
 
 game.Players.PlayerAdded:Connect(function(player)
+	--setting up the player data
 	playerdata[player] = {
 		Coins = 0,
 		clicknumupgrade = 0,
@@ -21,10 +22,12 @@ game.Players.PlayerAdded:Connect(function(player)
 end)
 
 players.PlayerRemoving:Connect(function(player)
+	--cleaning up the player data so that it does not clog up the server
 	playerdata[player] = nil
 end)
 
 local function CalculateCoinsEarned(player)
+	--calculates the amount of coins the player will earn per click based on their upgrades
 	local clicknum = player:GetAttribute("clicknumupgrade")
 	local multiply = player:GetAttribute("clickmultiplyupgrade")
 	local rebirths = player:GetAttribute("rebirths")
@@ -41,6 +44,8 @@ clickevent.OnServerEvent:Connect(function(player)
 	local gain = CalculateCoinsEarned(player)
 	local coins = player:GetAttribute("Coins")
 	coins += gain
+	--updates the player's coins when a click event is fired
 	
 	player:SetAttribute("Coins", math.ceil(coins))
+	--rounds up the players coins, this ensures that the player feels an actual difference because when you gain 1.2 coins, rounding down to 1 coin makes it seem like the game is broken and not working
 end)

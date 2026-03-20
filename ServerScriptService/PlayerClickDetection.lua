@@ -4,27 +4,7 @@ local playerdata = {}
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local clickevent = ReplicatedStorage:WaitForChild("ClickEvent")
 
-game.Players.PlayerAdded:Connect(function(player)
-	--setting up the player data
-	playerdata[player] = {
-		Coins = 0,
-		clicknumupgrade = 0,
-		clickmultiplyupgrade = 0,
-		rebirths = 0
-	}
-	player:SetAttribute("Coins", 0)
-	player:SetAttribute("clicknumupgrade", 0)
-	player:SetAttribute("clickmultiplyupgrade", 0)
-	player:SetAttribute("rebirths",0)
 
-
-
-end)
-
-players.PlayerRemoving:Connect(function(player)
-	--cleaning up the player data so that it does not clog up the server
-	playerdata[player] = nil
-end)
 
 local function CalculateCoinsEarned(player)
 	--calculates the amount of coins the player will earn per click based on their upgrades

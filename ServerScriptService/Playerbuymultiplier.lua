@@ -3,18 +3,21 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buyevent = ReplicatedStorage:WaitForChild("BuyMultiplierEvent")
 local function round(num)
 	return math.floor(num * 10 + 0.5) / 10
+	--rounds the number to 1 decimal place
 end
+--function only triggers when the user buys a multiplier upgrade
 buyevent.OnServerEvent:Connect(function(player)
 	local usermoney = player:GetAttribute("Coins")
 	local userupgradelevel = player:GetAttribute("clickmultiplyupgrade")
 	local upgradecost = 100*(1+0.2*userupgradelevel)*1.25^(userupgradelevel)
 	local format = require(game.ReplicatedStorage.NumberFormat)
+	--performs caclculations to see if the player can afford the upgrade
 	if usermoney >= upgradecost then
 		player:SetAttribute("Coins", usermoney-upgradecost)
 		player:SetAttribute("clickmultiplyupgrade", userupgradelevel+1)
 		userupgradelevel = player:GetAttribute("clickmultiplyupgrade")
 		local price = player.PlayerGui.Clickmore.bigouterframe.upgradeclickmultiply.Price
-		
+		--modifies the players coins once they have bought the upgrade and recalculates the price of the next upgrade
 		price.Text = "Price: ".. format.doit(math.ceil(100*(1+0.2*userupgradelevel)*1.25^(userupgradelevel)))
 		
 		local upgradeshow = player.PlayerGui.Clickmore.bigouterframe.upgradeclickmultiply.UpgradeShow

@@ -13,3 +13,5 @@ click.MouseButton1Click:Connect(function()
 	end
 	
 end)
+
+--sets the gui for the upgrades to be false by default, and toggles it when the player clicks on the button

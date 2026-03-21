@@ -10,7 +10,7 @@ end
 buyevent.OnServerEvent:Connect(function(player)
 	local usermoney = player:GetAttribute("Coins")
 	local userupgradelevel = player:GetAttribute("rebirths")
-	local upgradecost = 1000^(userupgradelevel)
+	local upgradecost = 1000^(userupgradelevel+1)
 	local format = require(game.ReplicatedStorage.NumberFormat)
 	--calculates if user has enough currency for a rebirth
 	if usermoney >= upgradecost then

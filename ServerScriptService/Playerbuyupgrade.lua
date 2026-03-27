@@ -1,7 +1,10 @@
 -- @ScriptType: Script
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local buyevent = ReplicatedStorage:WaitForChild("BuyUpgradeEvent")
-
+local function round(num)
+	return math.floor(num * 10 + 0.5) / 10
+	--rounds the number to 1 decimal place
+end
 buyevent.OnServerEvent:Connect(function(player)
 	local usermoney = player:GetAttribute("Coins")
 	local userupgradelevel = player:GetAttribute("clicknumupgrade")
@@ -9,7 +12,7 @@ buyevent.OnServerEvent:Connect(function(player)
 	local format = require(game.ReplicatedStorage.NumberFormat)
 	--calculates if user has enough currency for the upgrade
 	if usermoney >= upgradecost then
-		player:SetAttribute("Coins", usermoney-upgradecost)
+		player:SetAttribute("Coins", round(usermoney-upgradecost))
 		player:SetAttribute("clicknumupgrade", userupgradelevel+1)
 		userupgradelevel = player:GetAttribute("clicknumupgrade")
 		local price = player.PlayerGui.Clickmore.bigouterframe.upgradeclicknum.Price

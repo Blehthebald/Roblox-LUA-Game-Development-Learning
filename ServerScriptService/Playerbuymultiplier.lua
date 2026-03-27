@@ -13,7 +13,7 @@ buyevent.OnServerEvent:Connect(function(player)
 	local format = require(game.ReplicatedStorage.NumberFormat)
 	--performs caclculations to see if the player can afford the upgrade
 	if usermoney >= upgradecost then
-		player:SetAttribute("Coins", usermoney-upgradecost)
+		player:SetAttribute("Coins", round(usermoney-upgradecost))
 		player:SetAttribute("clickmultiplyupgrade", userupgradelevel+1)
 		userupgradelevel = player:GetAttribute("clickmultiplyupgrade")
 		local price = player.PlayerGui.Clickmore.bigouterframe.upgradeclickmultiply.Price

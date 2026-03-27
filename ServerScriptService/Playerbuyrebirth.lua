@@ -14,7 +14,7 @@ buyevent.OnServerEvent:Connect(function(player)
 	local format = require(game.ReplicatedStorage.NumberFormat)
 	--calculates if user has enough currency for a rebirth
 	if usermoney >= upgradecost then
-		player:SetAttribute("Coins", usermoney-upgradecost)
+		
 		player:SetAttribute("rebirths", userupgradelevel+1)
 		userupgradelevel = player:GetAttribute("rebirths")
 		local price = player.PlayerGui.Clickmore.bigouterframe.upgradeclickrebirth.Price
